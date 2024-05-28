@@ -1,0 +1,19 @@
+{
+    "name": "ajaxy/woocommerce_tabs",
+    "authors": [
+        {
+            "name": "Naji Amer",
+            "email": "icu090@gmail.com"
+        }
+    ],
+    "require": {
+        "ajaxy/wp-list-table": "dev-master",
+        "ajaxy/http": "^1.0"
+    },
+    "repositories":[
+    {
+        "type": "vcs",
+        "url": "/Users/macuser/github/Ajaxy/WP_List_Table/WP_List_Table/"
+    }
+]
+}

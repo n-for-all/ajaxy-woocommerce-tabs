@@ -1,0 +1,83 @@
+[
+    {
+        "name": "ajaxy/http",
+        "version": "v1.0.2",
+        "version_normalized": "1.0.2.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/n-for-all/http.git",
+            "reference": "4573ddfa32039af78cefb8e48772ecfa7ce7438b"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/n-for-all/http/zipball/4573ddfa32039af78cefb8e48772ecfa7ce7438b",
+            "reference": "4573ddfa32039af78cefb8e48772ecfa7ce7438b",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.4.0"
+        },
+        "time": "2018-05-19T11:51:27+00:00",
+        "type": "ajaxy",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Ajaxy\\Http\\": "/src"
+            },
+            "exclude-from-classmap": [
+                "/tests/"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Naji Amer",
+                "email": "contact@ajaxy.org"
+            }
+        ],
+        "description": "Ajaxy Http request response using sockets",
+        "homepage": "https://ajaxy.org"
+    },
+    {
+        "name": "ajaxy/wp-list-table",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "/Users/macuser/github/Ajaxy/WP_List_Table/WP_List_Table/",
+            "reference": "66ce39d609da0ce289fe1fdcde23f3b2eb60f3a7"
+        },
+        "require": {
+            "php": ">=5.4.0"
+        },
+        "time": "2019-05-19T17:33:57+00:00",
+        "type": "ajaxy",
+        "installation-source": "source",
+        "autoload": {
+            "psr-4": {
+                "Ajaxy\\WP\\": "/src"
+            },
+            "files": [
+                "src/Ajaxy/WP/table.php",
+                "src/Ajaxy/WP/columns.php"
+            ],
+            "exclude-from-classmap": [
+                "/tests/"
+            ]
+        },
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Naji Amer",
+                "email": "contact@ajaxy.org"
+            }
+        ],
+        "description": "Ajaxy wrapper for wp list table",
+        "homepage": "https://ajaxy.org"
+    }
+]

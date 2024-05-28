@@ -1,0 +1,17 @@
+#awt_tabs.postbox .nav-tab-wrapper{
+    padding: 0;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    clear: both;
+}
+#awt_tabs.postbox .nav-tab-wrapper .nav-tab-active{
+    background: #0073aa;
+    color: #fff;
+    border-color: #0073aa;
+}
+#awt_tabs.postbox .tab-content{
+    display: none;
+}
+#awt_tabs.postbox .tab-content-active{
+    display: block;
+}
