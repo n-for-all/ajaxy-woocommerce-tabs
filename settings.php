@@ -95,7 +95,7 @@ class AWT_Plugin_Settings
                 'page' => 'awt-setting-admin',
                 'edit' => $save,
                 'tab' => 'edit'
-            ), 'edit.php')));
+            ), 'edit.php'))); 
             die();
         }
 
