@@ -37,7 +37,8 @@ class AWT_Plugin_Settings
                 $id = $_GET['delete'];
                 if (!isset($tabs[$id])) {
                     return new WP_Error('awt-tabs', 'Tab doesn\'t exist');
-                };
+                }
+                ;
                 unset($tabs[$id]);
                 update_option('awt_tabs', $tabs);
                 wp_redirect(esc_url_raw(add_query_arg(array(
@@ -72,7 +73,7 @@ class AWT_Plugin_Settings
     public function create_admin_page()
     {
         $page = isset($_GET['tab']) ? $_GET['tab'] : 'list';
-        $tabs = (array)get_option('awt_tabs');
+        $tabs = (array) get_option('awt_tabs');
         $save = $this->save_tab($tabs, $page);
         if (isset($_GET['error'])) {
             add_settings_error(
@@ -95,7 +96,7 @@ class AWT_Plugin_Settings
                 'page' => 'awt-setting-admin',
                 'edit' => $save,
                 'tab' => 'edit'
-            ), 'edit.php'))); 
+            ), 'edit.php')));
             die();
         }
 
@@ -273,12 +274,12 @@ class AWT_Plugin_Settings
     {
         $settings = array(
             'textarea_name' => 'awt_tabs[content]',
-            'quicktags'     => array('buttons' => 'em,strong,link'),
-            'tinymce'       => array(
+            'quicktags' => array('buttons' => 'em,strong,link'),
+            'tinymce' => array(
                 'theme_advanced_buttons1' => 'bold,italic,strikethrough,separator,bullist,numlist,separator,blockquote,separator,justifyleft,justifycenter,justifyright,separator,link,unlink,separator,undo,redo,separator',
                 'theme_advanced_buttons2' => '',
             ),
-            'editor_css'    => '<style>#wp-tabs-excerpt-editor-container .wp-editor-area{max-height:375px; width:100%;}</style>',
+            'editor_css' => '<style>#wp-tabs-excerpt-editor-container .wp-editor-area{max-height:375px; width:100%;}</style>',
         );
         wp_editor(htmlspecialchars_decode(isset($this->options['content']) ? esc_attr($this->options['content']) : '', ENT_QUOTES), 'tabs-excerpt', $settings);
     }

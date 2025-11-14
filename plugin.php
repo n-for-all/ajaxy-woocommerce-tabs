@@ -1,11 +1,11 @@
 <?php
 /*
 Plugin Name: Ajaxy WooCommerce Tabs
-Plugin URI: http://aaagency.ae
+Plugin URI: https://ajaxy.org
 Description:
 Version: 1.0.0
 Author: Naji Amer - @n-for-all
-Author URI: https://aaagency.ae
+Author URI: https://ajaxy.org
 */
 
 define('AWT_TEXT_DOMAIN', 'awt');
@@ -14,7 +14,9 @@ define('AWT_PLUGIN_PATH', dirname(__FILE__));
 
 require_once AWT_PLUGIN_PATH . '/vendor/autoload.php';
 
-require_once 'settings.php';
+if (is_admin()) {
+    require_once 'settings.php';
+}
 require_once 'tabs.php';
 
 class AWT_Plugin
@@ -27,6 +29,11 @@ class AWT_Plugin
         add_action('admin_notices', array(&$this, 'admin_notice'));
         add_action('admin_enqueue_scripts', array(&$this, 'admin_scripts'));
         add_action('woocommerce_product_tabs', array(&$this, 'woocommerce_product_tabs'), 20);
+        if (is_admin()) {
+            add_action('plugins_loaded', function () {
+                new AWT_Plugin_Settings();
+            });
+        }
     }
     public function admin_scripts()
     {
@@ -34,19 +41,19 @@ class AWT_Plugin
     }
     public function woocommerce_product_tabs($tabs)
     {
-        $awt_tabs = (array)get_option('awt_tabs');
-        $settings  = $awt_tabs['_settings'] ?? [];
+        $awt_tabs = (array) get_option('awt_tabs');
+        $settings = $awt_tabs['_settings'] ?? [];
         unset($awt_tabs['_settings']);
         uasort($awt_tabs, function ($a, $b) {
-            if ($a['order'] == $b['order']) {
+            if (!isset($a['order']) || !isset($b['order']) || $a['order'] == $b['order']) {
                 return 0;
             }
             return ($a['order'] < $b['order']) ? -1 : 1;
         });
 
         $hide_tabs = $settings['hide_tabs'] ?? [];
-        foreach($tabs as $key => $tab){
-            if(in_array($key, $hide_tabs)){
+        foreach ($tabs as $key => $tab) {
+            if (in_array($key, $hide_tabs)) {
                 unset($tabs[$key]);
             }
         }
@@ -101,7 +108,7 @@ class AWT_Plugin
 
     public function get_post_tab($key, $data, $post)
     {
-        foreach ((array)$data as $_key => $tab) {
+        foreach ((array) $data as $_key => $tab) {
             if ($key == $_key) {
                 return $tab;
             }
@@ -119,8 +126,8 @@ class AWT_Plugin
         }
         $id = $_post->post_type == 'product' ? $_post->get_id() : $_post->ID;
 
-        $awt_tabs = (array)get_option('awt_tabs');
-        foreach ((array)$awt_tabs as $key => $tab) {
+        $awt_tabs = (array) get_option('awt_tabs');
+        foreach ((array) $awt_tabs as $key => $tab) {
             if ($key == $_key) {
                 $data = get_post_meta($id, 'awt_tabs', true);
                 if (!isset($data[$_key])) {
@@ -130,7 +137,7 @@ class AWT_Plugin
                     // update all fields
                     $data[$_key] = $_tab;
                 } else {
-                    foreach ((array)$fields as $field) {
+                    foreach ((array) $fields as $field) {
                         $data[$_key][$field] = isset($_tab[$field]) ? $_tab[$field] : '';
                     }
                 }
@@ -164,7 +171,3 @@ class AWT_Plugin
 
 global $AWT_Plugin;
 $AWT_Plugin = new AWT_Plugin();
-if (is_admin()) {
-    $settings = new AWT_Plugin_Settings();
-    // $settings = new AWT_Plugin_Admin_Settings();
-}
